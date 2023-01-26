@@ -2,6 +2,7 @@ package pl.put.poznan.pdrive.service.impl;
 
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
+import pl.put.poznan.pdrive.entity.Card;
 import pl.put.poznan.pdrive.entity.User;
 import pl.put.poznan.pdrive.entity.UserType;
 import pl.put.poznan.pdrive.repository.UserRepository;
@@ -18,6 +19,11 @@ public class UserServiceImpl implements UserService {
     @Override
     public User getUser(String username) {
         return userRepository.findByUsername(username);
+    }
+
+    @Override
+    public User getUser(Card card) {
+        return userRepository.findUserByCardsContaining(card);
     }
 
     @Override

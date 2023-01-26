@@ -6,4 +6,6 @@ import pl.put.poznan.pdrive.entity.User;
 public interface CardService {
 
     Card getCard(User user);
+
+    Card topUpCard(Card card, Long transfer);
 }
