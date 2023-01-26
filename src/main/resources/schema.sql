@@ -87,16 +87,19 @@ CREATE TABLE stations
 
 CREATE TABLE trips
 (
-    id         INTEGER GENERATED ALWAYS AS IDENTITY,
-    card_id    INTEGER NOT NULL,
-    payment_id INTEGER NOT NULL,
-    station_id INTEGER NOT NULL,
-    vehicle_id INTEGER NOT NULL,
+    id                     INTEGER GENERATED ALWAYS AS IDENTITY,
+    card_id                INTEGER NOT NULL,
+    payment_id             INTEGER NOT NULL,
+    origin_station_id      INTEGER NOT NULL,
+    destination_station_id INTEGER NOT NULL,
+    distance               INTEGER NOT NULL,
+    vehicle_id             INTEGER NOT NULL,
 
     CONSTRAINT pk__trips PRIMARY KEY (id),
     CONSTRAINT fk__trips__cards FOREIGN KEY (card_id) REFERENCES cards (id),
     CONSTRAINT fk__trips__payments FOREIGN KEY (payment_id) REFERENCES payments (id),
-    CONSTRAINT fk__trips__stations FOREIGN KEY (station_id) REFERENCES stations (id),
+    CONSTRAINT fk__trips_origin__stations FOREIGN KEY (origin_station_id) REFERENCES stations (id),
+    CONSTRAINT fk__trips_destination__stations FOREIGN KEY (destination_station_id) REFERENCES stations (id),
     CONSTRAINT fk__trips__vehicles FOREIGN KEY (vehicle_id) REFERENCES vehicles (id)
 );
 
