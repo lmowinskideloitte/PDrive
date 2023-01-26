@@ -19,4 +19,9 @@ public class VehicleServiceImpl implements VehicleService {
     public List<Vehicle> getAllVehicles() {
         return vehicleRepository.findAll();
     }
+
+    @Override
+    public Vehicle addVehicle() {
+        return new Vehicle();
+    }
 }

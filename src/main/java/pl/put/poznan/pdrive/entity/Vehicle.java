@@ -25,10 +25,10 @@ public class Vehicle {
     private VehicleType vehicleType;
 
     @Column(name = "trip_count")
-    private Long tripCount;
+    private Long tripCount = 0L;
 
     @Column(name = "battery_charge")
-    private Long batteryCharge;
+    private Long batteryCharge = 100L;
 
     @OneToMany(mappedBy = "vehicle", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Trip> trips = new LinkedHashSet<>();
