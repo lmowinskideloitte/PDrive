@@ -40,10 +40,12 @@ CREATE TABLE cards
 
 CREATE TABLE payments
 (
-    id   INTEGER GENERATED ALWAYS AS IDENTITY,
-    cost INTEGER NOT NULL,
+    id      INTEGER GENERATED ALWAYS AS IDENTITY,
+    cost    INTEGER NOT NULL,
+    card_id INTEGER NOT NULL,
 
-    CONSTRAINT pk__payments PRIMARY KEY (id)
+    CONSTRAINT pk__payments PRIMARY KEY (id),
+    CONSTRAINT fk__payments__cards FOREIGN KEY (card_id) REFERENCES cards (id)
 );
 
 CREATE TABLE vehicle_types
@@ -79,10 +81,12 @@ CREATE TABLE locations
 CREATE TABLE stations
 (
     id             INTEGER GENERATED ALWAYS AS IDENTITY,
-    address        TEXT NOT NULL,
+    location_id    INTEGER NOT NULL,
+    address        TEXT    NOT NULL,
     vehicles_count INTEGER DEFAULT 0,
 
-    CONSTRAINT pk__stations PRIMARY KEY (id)
+    CONSTRAINT pk__stations PRIMARY KEY (id),
+    CONSTRAINT fk__stations FOREIGN KEY (location_id) REFERENCES locations (id)
 );
 
 CREATE TABLE trips
@@ -126,4 +130,3 @@ CREATE TABLE events
     CONSTRAINT fk__events__trips FOREIGN KEY (trip_id) REFERENCES trips (id),
     CONSTRAINT fk__events__vehicles FOREIGN KEY (vehicle_id) REFERENCES vehicles (id)
 );
-
