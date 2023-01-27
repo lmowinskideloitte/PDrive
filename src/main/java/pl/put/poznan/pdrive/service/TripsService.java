@@ -10,4 +10,5 @@ public interface TripsService {
 
     List<Trip> getTrips(Card card);
     List<Trip> getTrips(User user);
+    Trip addTrip(Trip trip);
 }

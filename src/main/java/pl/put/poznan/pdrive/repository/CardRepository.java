@@ -4,7 +4,9 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import pl.put.poznan.pdrive.entity.Card;
 import pl.put.poznan.pdrive.entity.User;
 
-public interface CardRepository extends JpaRepository<Card, Long> {
+import java.util.List;
 
-    Card findByUser(User user);
+public interface CardRepository extends JpaRepository<Card, Long> {
+    List<Card> findByUser(User user);
+
 }

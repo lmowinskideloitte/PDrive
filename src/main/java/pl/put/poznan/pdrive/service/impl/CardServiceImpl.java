@@ -8,6 +8,7 @@ import pl.put.poznan.pdrive.repository.CardRepository;
 import pl.put.poznan.pdrive.service.CardService;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Service
 @AllArgsConstructor
@@ -16,7 +17,7 @@ public class CardServiceImpl implements CardService {
     private final CardRepository cardRepository;
 
     @Override
-    public Card getCard(User user) {
+    public List<Card> getCards(User user) {
         return cardRepository.findByUser(user);
     }
 
@@ -24,6 +25,6 @@ public class CardServiceImpl implements CardService {
     public Card topUpCard(Card card, Long transfer) {
         card.setBalance(card.getBalance() + transfer);
         card.setExpirationDate(LocalDate.now().plusMonths(1));
-        return card;
+        return cardRepository.save(card);
     }
 }

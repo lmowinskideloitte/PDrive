@@ -39,7 +39,6 @@ public class UserServiceImpl implements UserService {
         UserType userType = new UserType();
         userType.setRole("USER");
         user.setUserType(userType);
-
-        return user;
+        return userRepository.save(user);
     }
 }

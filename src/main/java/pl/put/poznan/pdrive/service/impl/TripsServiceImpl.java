@@ -25,4 +25,9 @@ public class TripsServiceImpl implements TripsService {
     public List<Trip> getTrips(User user) {
         return tripRepository.findByCard_User(user);
     }
+
+    @Override
+    public Trip addTrip(Trip trip) {
+        return tripRepository.save(trip);
+    }
 }
