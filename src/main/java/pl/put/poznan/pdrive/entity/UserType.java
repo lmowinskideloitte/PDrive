@@ -17,8 +17,9 @@ public class UserType {
     @Column(name = "id", nullable = false)
     private Long id;
 
+    @Enumerated(EnumType.STRING)
     @Column(name = "role", nullable = false)
-    private String role;
+    private UserTypeE role;
 
     @Column(name = "description")
     private String description;
