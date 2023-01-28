@@ -12,10 +12,7 @@
 <VBox xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pl.put.poznan.pdrive.GUI.Login">
    <children>
       <BorderPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #87878787;">
-         <left>
-            <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
-         </left>
-         <right>
+         <center>
             <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                <children>
                   <Label layoutX="14.0" layoutY="63.0" text="Username">
@@ -34,7 +31,7 @@
                   <Label fx:id="loginLabel" layoutX="86.0" layoutY="42.0" textFill="RED" />
                </children>
             </AnchorPane>
-         </right>
+         </center>
       </BorderPane>
    </children>
 </VBox>
