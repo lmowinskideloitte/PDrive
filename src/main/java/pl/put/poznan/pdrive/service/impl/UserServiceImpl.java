@@ -10,6 +10,8 @@ import pl.put.poznan.pdrive.service.UserService;
 
 import java.util.List;
 
+import static pl.put.poznan.pdrive.entity.UserTypeE.USER;
+
 @Service
 @AllArgsConstructor
 public class UserServiceImpl implements UserService {
@@ -27,6 +29,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public User checkUser(String username, String password) {
+        return userRepository.findByUsernameAndPassword(username, password);
+    }
+
+    @Override
     public List<User> getAllUsers() {
         return userRepository.findAll();
     }
@@ -37,7 +44,7 @@ public class UserServiceImpl implements UserService {
         user.setUsername(username);
         user.setPassword(password);
         UserType userType = new UserType();
-        userType.setRole("USER");
+        userType.setRole(USER);
         user.setUserType(userType);
         return userRepository.save(user);
     }

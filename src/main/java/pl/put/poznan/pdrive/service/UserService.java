@@ -9,6 +9,7 @@ public interface UserService {
 
     User getUser(String username);
     User getUser(Card card);
+    User checkUser(String username, String password);
     List<User> getAllUsers();
     User createUser(String username, String password);
 }
