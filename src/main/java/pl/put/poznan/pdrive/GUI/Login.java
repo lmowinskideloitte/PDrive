@@ -34,6 +34,9 @@ public class Login {
     @Value("classpath:/register.fxml")
     Resource registerResource;
 
+    @Value("classpath:/main_scene.fxml")
+    Resource main_scene_Resource;
+
     public Login(StageInitializer stageInitializer, UserService userService) {
         this.stageInitializer = stageInitializer;
         this.userService = userService;
@@ -43,9 +46,14 @@ public class Login {
         User user = userService.checkUser(usernameField.getText(), passwordField.getText());
         if (user != null) {
             loginLabel.setText("Success!");
+            switchToMainScene(event);
         } else {
             loginLabel.setText("Try again");
         }
+    }
+
+    public void switchToMainScene(ActionEvent event){
+        stageInitializer.switchScene(main_scene_Resource);
     }
 
     public void switchToRegister(ActionEvent event) {
