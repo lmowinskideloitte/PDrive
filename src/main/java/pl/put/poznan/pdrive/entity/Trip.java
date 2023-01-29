@@ -1,11 +1,13 @@
 package pl.put.poznan.pdrive.entity;
 
 import jakarta.persistence.*;
+import lombok.Getter;
 
 import java.util.LinkedHashSet;
 import java.util.Set;
 
 @Entity
+@Getter
 @Table(name = "trips")
 public class Trip {
 
