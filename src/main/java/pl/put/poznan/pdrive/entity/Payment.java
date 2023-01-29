@@ -27,4 +27,8 @@ public class Payment {
     @OneToOne(mappedBy = "payment", cascade = CascadeType.ALL, optional = false, orphanRemoval = true)
     private Trip trip;
 
+    @Override
+    public String toString(){
+        return "%d".formatted(cost);
+    }
 }

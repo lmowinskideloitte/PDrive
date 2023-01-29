@@ -25,4 +25,9 @@ public class Station {
 
     @Column(name = "vehicles_count")
     private Long vehiclesCount;
+
+    @Override
+    public String toString(){
+        return "%s %s".formatted(address, location);
+    }
 }

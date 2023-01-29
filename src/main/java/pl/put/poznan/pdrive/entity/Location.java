@@ -29,4 +29,9 @@ public class Location {
     @OneToMany(mappedBy = "location", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Station> stations = new LinkedHashSet<>();
 
+
+    @Override
+    public String toString(){
+        return "%s %s".formatted(district, city);
+    }
 }
