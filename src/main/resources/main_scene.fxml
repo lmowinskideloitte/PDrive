@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="516.0" prefWidth="703.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pl.put.poznan.pdrive.GUI.MainScene">
+   <children>
+      <TableView layoutX="8.0" layoutY="88.0" prefHeight="200.0" prefWidth="689.0">
+        <columns>
+          <TableColumn prefWidth="75.0" text="payment ID" />
+          <TableColumn prefWidth="75.0" text="station ID" />
+        </columns>
+      </TableView>
+      <Label layoutX="557.0" layoutY="14.0" prefHeight="74.0" prefWidth="132.0" text="//NAZWA USERA" />
+      <Button layoutX="627.0" layoutY="294.0" mnemonicParsing="false" prefHeight="200.0" prefWidth="61.0" text="Button" />
+      <ListView layoutX="9.0" layoutY="294.0" prefHeight="200.0" prefWidth="611.0" />
+   </children>
+</AnchorPane>
