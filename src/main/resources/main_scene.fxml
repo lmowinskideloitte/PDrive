@@ -7,8 +7,12 @@
    <children>
       <TableView layoutX="8.0" layoutY="88.0" prefHeight="200.0" prefWidth="689.0">
         <columns>
-          <TableColumn prefWidth="75.0" text="payment ID" />
-          <TableColumn prefWidth="75.0" text="station ID" />
+          <TableColumn prefWidth="113.0" text="payment ID" />
+          <TableColumn prefWidth="133.0" text="origin station ID" />
+            <TableColumn prefWidth="120.0" text="destination station ID" />
+            <TableColumn minWidth="4.0" prefWidth="135.0" text="distance" />
+            <TableColumn prefWidth="95.0" text="vehicle ID" />
+            <TableColumn prefWidth="92.0" text="cost" />
         </columns>
       </TableView>
       <Label layoutX="557.0" layoutY="14.0" prefHeight="74.0" prefWidth="132.0" text="//NAZWA USERA" />
