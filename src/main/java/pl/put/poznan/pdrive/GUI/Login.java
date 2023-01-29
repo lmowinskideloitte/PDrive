@@ -19,8 +19,7 @@ public class Login {
 
     private final StageInitializer stageInitializer;
     private final UserService userService;
-
-    CurrValues currValues;
+    private final CurrValues currValues;
     @FXML
     private Button loginButton;
     @FXML
@@ -38,16 +37,17 @@ public class Login {
     @Value("classpath:/main_scene.fxml")
     Resource main_scene_Resource;
 
-    public Login(StageInitializer stageInitializer, UserService userService) {
+    public Login(StageInitializer stageInitializer, UserService userService, CurrValues currValues) {
         this.stageInitializer = stageInitializer;
         this.userService = userService;
+        this.currValues = currValues;
     }
 
     public void userLogin(ActionEvent event) {
         User user = userService.checkUser(usernameField.getText(), passwordField.getText());
         if (user != null) {
             loginLabel.setText("Success!");
-            //currValues.setUserName(user.getUsername());
+            currValues.setCurrentUser(user);
             switchToMainScene(event);
         } else {
             loginLabel.setText("Try again");

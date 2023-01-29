@@ -2,6 +2,7 @@
 
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
 <AnchorPane prefHeight="516.0" prefWidth="703.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pl.put.poznan.pdrive.GUI.MainScene">
    <children>
@@ -15,10 +16,14 @@
             <TableColumn prefWidth="92.0" text="cost" />
         </columns>
       </TableView>
-      <Label fx:id="personal_label" layoutX="300.0" layoutY="8.0" prefHeight="74.0" prefWidth="132.0" text="//NAZWA USERA" />
-      <Button layoutX="603.0" layoutY="294.0" mnemonicParsing="false" prefHeight="200.0" prefWidth="92.0" text="Wynajmij" />
+      <Label fx:id="personal_label" contentDisplay="CENTER" layoutX="217.0" layoutY="8.0" prefHeight="74.0" prefWidth="271.0" text="user">
+         <font>
+            <Font size="30.0" />
+         </font></Label>
+      <Button fx:id="rentButton" layoutX="603.0" layoutY="294.0" mnemonicParsing="false" onAction="#rent" prefHeight="200.0" prefWidth="92.0" text="Wynajmij" />
       <ListView fx:id="myListView" layoutX="9.0" layoutY="294.0" prefHeight="200.0" prefWidth="582.0" />
       <Button fx:id="logOutButton" layoutX="621.0" layoutY="14.0" mnemonicParsing="false" onAction="#setLogOutButton" prefHeight="55.0" prefWidth="57.0" text="Log out" />
-      <Label fx:id="personal_label1" layoutX="21.0" layoutY="14.0" prefHeight="62.0" prefWidth="84.0" text="//CARD " />
+      <Label fx:id="personal_label1" layoutX="66.0" layoutY="14.0" prefHeight="62.0" prefWidth="84.0" text="//CARD " />
+      <Button fx:id="refreshButton" layoutY="2.0" mnemonicParsing="false" onAction="#setValues" text="refresh" textFill="RED" />
    </children>
 </AnchorPane>

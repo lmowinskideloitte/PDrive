@@ -1,13 +1,15 @@
 package pl.put.poznan.pdrive.GUI;
 
+import lombok.Getter;
+import lombok.Setter;
+import org.springframework.stereotype.Service;
 import pl.put.poznan.pdrive.entity.User;
-import pl.put.poznan.pdrive.service.UserService;
+import pl.put.poznan.pdrive.entity.Vehicle;
 
+@Service
+@Setter
+@Getter
 public class CurrValues {
-    UserService userService;
-    String curr_userName;
-
-    public void setUserName(String name){
-        curr_userName = name;
-    }
+    User currentUser;
+    Vehicle currentVehicle;
 }
