@@ -48,27 +48,6 @@ CREATE TABLE payments
     CONSTRAINT fk__payments__cards FOREIGN KEY (card_id) REFERENCES cards (id)
 );
 
-CREATE TABLE vehicle_types
-(
-    id          INTEGER GENERATED ALWAYS AS IDENTITY,
-    name        TEXT NOT NULL,
-    description TEXT,
-
-    CONSTRAINT pk__vehicle_types PRIMARY KEY (id)
-);
-
-CREATE TABLE vehicles
-(
-    id             INTEGER GENERATED ALWAYS AS IDENTITY,
-    vehicle_type   INTEGER NOT NULL DEFAULT 0,
-    trip_count     INTEGER          DEFAULT 0,
-    battery_charge INTEGER          DEFAULT 100,
-
-    CONSTRAINT pk__vehicles PRIMARY KEY (id),
-    CONSTRAINT fk__vehicles__vehicle_type FOREIGN KEY (vehicle_type) REFERENCES vehicle_types (id),
-    CONSTRAINT ch__vehicles__battery_charge_range CHECK ( battery_charge >= 0 AND battery_charge <= 100)
-);
-
 CREATE TABLE locations
 (
     id       INTEGER GENERATED ALWAYS AS IDENTITY,
@@ -87,6 +66,31 @@ CREATE TABLE stations
 
     CONSTRAINT pk__stations PRIMARY KEY (id),
     CONSTRAINT fk__stations FOREIGN KEY (location_id) REFERENCES locations (id)
+);
+
+CREATE TABLE vehicle_types
+(
+    id          INTEGER GENERATED ALWAYS AS IDENTITY,
+    name        TEXT NOT NULL,
+    description TEXT,
+
+    CONSTRAINT pk__vehicle_types PRIMARY KEY (id)
+);
+
+CREATE TABLE vehicles
+(
+    id             INTEGER GENERATED ALWAYS AS IDENTITY,
+    vehicle_type   INTEGER NOT NULL DEFAULT 0,
+    trip_count     INTEGER          DEFAULT 0,
+    battery_charge INTEGER          DEFAULT 100,
+    renter_id      INTEGER,
+    station_id     INTEGER,
+
+    CONSTRAINT pk__vehicles PRIMARY KEY (id),
+    CONSTRAINT fk__vehicles__vehicle_type FOREIGN KEY (vehicle_type) REFERENCES vehicle_types (id),
+    CONSTRAINT fk__vehicles__users FOREIGN KEY (renter_id) REFERENCES users (id),
+    CONSTRAINT fk__vehicles__stations FOREIGN KEY (station_id) REFERENCES stations (id),
+    CONSTRAINT ch__vehicles__battery_charge_range CHECK ( battery_charge >= 0 AND battery_charge <= 100)
 );
 
 CREATE TABLE trips
