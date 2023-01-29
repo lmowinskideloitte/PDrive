@@ -40,6 +40,10 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User createUser(String username, String password) {
+        User checkedUser = userRepository.findByUsername(username);
+        if (checkedUser != null) {
+            return null;
+        }
         User user = new User();
         user.setUsername(username);
         user.setPassword(password);

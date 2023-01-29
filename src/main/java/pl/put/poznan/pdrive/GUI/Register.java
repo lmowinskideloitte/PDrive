@@ -13,9 +13,8 @@ import pl.put.poznan.pdrive.StageInitializer;
 import pl.put.poznan.pdrive.entity.User;
 import pl.put.poznan.pdrive.service.UserService;
 
-
 @Controller
-public class Login {
+public class Register {
 
     private final StageInitializer stageInitializer;
     private final UserService userService;
@@ -25,30 +24,30 @@ public class Login {
     @FXML
     private Button registerButton;
     @FXML
-    private Label loginLabel;
+    private Label registerLabel;
     @FXML
     private TextField usernameField;
     @FXML
     private PasswordField passwordField;
 
-    @Value("classpath:/register.fxml")
-    Resource registerResource;
+    @Value("classpath:/login.fxml")
+    Resource loginResource;
 
-    public Login(StageInitializer stageInitializer, UserService userService) {
+    public Register(StageInitializer stageInitializer, UserService userService) {
         this.stageInitializer = stageInitializer;
         this.userService = userService;
     }
 
-    public void userLogin(ActionEvent event) {
+    public void userRegister(ActionEvent event) {
         User user = userService.checkUser(usernameField.getText(), passwordField.getText());
         if (user != null) {
-            loginLabel.setText("Success!");
+            registerLabel.setText("Success!");
         } else {
-            loginLabel.setText("Try again");
+            registerLabel.setText("Try again");
         }
     }
 
-    public void switchToRegister(ActionEvent event) {
-        stageInitializer.switchScene(registerResource);
+    public void switchToLogin(ActionEvent event) {
+        stageInitializer.switchScene(loginResource);
     }
 }

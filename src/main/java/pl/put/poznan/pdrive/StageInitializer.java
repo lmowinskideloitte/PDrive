@@ -20,6 +20,7 @@ public class StageInitializer implements ApplicationListener<StageReadyEvent> {
     private Resource guiResource;
     private String applicationTitle;
     private ApplicationContext applicationContext;
+    private Stage stage;
 
     public StageInitializer(@Value("${spring.application.ui.title}") String applicationTitle,
                             ApplicationContext applicationContext) {
@@ -34,10 +35,21 @@ public class StageInitializer implements ApplicationListener<StageReadyEvent> {
             fxmlLoader.setControllerFactory(aClass -> applicationContext.getBean(aClass));
             Parent parent = fxmlLoader.load();
 
-            Stage stage = event.getStage();
+            stage = event.getStage();
             stage.setTitle(applicationTitle);
             stage.setScene(new Scene(parent));
             stage.show();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void switchScene(Resource fxmlResource) {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(fxmlResource.getURL());
+            fxmlLoader.setControllerFactory(aClass -> applicationContext.getBean(aClass));
+            Parent parent = fxmlLoader.load();
+            stage.setScene(new Scene(parent));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

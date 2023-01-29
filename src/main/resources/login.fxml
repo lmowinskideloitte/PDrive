@@ -27,8 +27,9 @@
                         <Font name="Calibri Bold" size="12.0" />
                      </font>
                   </Label>
-                  <Button fx:id="loginButton" layoutX="64.0" layoutY="140.0" mnemonicParsing="false" onAction="#userLogin" prefHeight="26.0" prefWidth="71.0" style="-fx-background-color: #ffc900;" text="Log in" />
+                  <Button fx:id="loginButton" layoutX="114.0" layoutY="139.0" mnemonicParsing="false" onAction="#userLogin" prefHeight="26.0" prefWidth="71.0" style="-fx-background-color: #ffc900;" text="Log in" />
                   <Label fx:id="loginLabel" layoutX="86.0" layoutY="42.0" textFill="RED" />
+                  <Button fx:id="registerButton" layoutX="16.0" layoutY="139.0" mnemonicParsing="false" onAction="#switchToRegister" prefHeight="26.0" prefWidth="71.0" style="-fx-background-color: #ffc900;" text="Register" />
                </children>
             </AnchorPane>
          </center>
