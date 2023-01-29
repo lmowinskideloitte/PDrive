@@ -32,4 +32,8 @@ public class User {
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Card> cards = new LinkedHashSet<>();
+
+    @OneToMany(mappedBy = "renter", orphanRemoval = true)
+    private Set<Vehicle> vehicles = new LinkedHashSet<>();
+
 }

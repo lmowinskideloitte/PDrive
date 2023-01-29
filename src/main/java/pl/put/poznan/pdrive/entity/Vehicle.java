@@ -4,7 +4,6 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lombok.ToString;
 
 import java.util.LinkedHashSet;
 import java.util.Set;
@@ -36,6 +35,14 @@ public class Vehicle {
 
     @OneToMany(mappedBy = "vehicle", orphanRemoval = true)
     private Set<Event> events = new LinkedHashSet<>();
+
+    @ManyToOne
+    @JoinColumn(name = "renter_id")
+    private User renter;
+
+    @ManyToOne
+    @JoinColumn(name = "station_id")
+    private Station station;
 
     @Override
     public String toString(){
