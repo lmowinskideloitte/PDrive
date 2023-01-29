@@ -20,6 +20,7 @@ public class Login {
     private final StageInitializer stageInitializer;
     private final UserService userService;
 
+    CurrValues currValues;
     @FXML
     private Button loginButton;
     @FXML
@@ -46,6 +47,7 @@ public class Login {
         User user = userService.checkUser(usernameField.getText(), passwordField.getText());
         if (user != null) {
             loginLabel.setText("Success!");
+            //currValues.setUserName(user.getUsername());
             switchToMainScene(event);
         } else {
             loginLabel.setText("Try again");

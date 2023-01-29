@@ -2,6 +2,8 @@ package pl.put.poznan.pdrive.GUI;
 
 
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -24,6 +26,8 @@ public class MainScene implements Initializable{
     private final StageInitializer stageInitializer;
     private final UserService userService;
     public final VehicleService vehicleService;
+
+    Vehicle currentVehicle;
     @FXML
     public javafx.scene.control.Label personal_label;
     @FXML
@@ -50,5 +54,9 @@ public class MainScene implements Initializable{
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         myListView.getItems().addAll(vehicleService.getAllVehicles());
+    }
+
+    public void rent(ActionEvent event){
+
     }
 }
