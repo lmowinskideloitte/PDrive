@@ -39,7 +39,7 @@ public class Register {
     }
 
     public void userRegister(ActionEvent event) {
-        User user = userService.checkUser(usernameField.getText(), passwordField.getText());
+        User user = userService.createUser(usernameField.getText(), passwordField.getText());
         if (user != null) {
             registerLabel.setText("Success!");
         } else {
