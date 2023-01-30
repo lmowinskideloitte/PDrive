@@ -41,4 +41,9 @@ public class Card {
     @OneToMany(mappedBy = "card", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Trip> trips = new LinkedHashSet<>();
 
+    @Override
+    public String toString(){
+        return "id: %s balance: %s".formatted(id,balance);
+    }
+
 }

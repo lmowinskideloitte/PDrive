@@ -9,7 +9,7 @@ public enum VehicleTypeE {
     SCOOTER("SCOOTER"),
     MOTORCYCLE("MOTORCYCLE");
 
-    final String value;
+    public final String value;
 
     VehicleTypeE(String value) {
         this.value = value;

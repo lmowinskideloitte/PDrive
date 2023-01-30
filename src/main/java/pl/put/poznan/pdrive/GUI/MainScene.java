@@ -9,6 +9,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.util.Callback;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Controller;
@@ -32,11 +33,9 @@ public class MainScene implements Initializable {
     private final TripsService tripsService;
     public final VehicleService vehicleService;
     public final CurrValues currValues;
-
     public final StationsService stationsService;
     public Button rentButton;
     public Button refreshButton;
-    public String chosenVehicle;
     @FXML
     public TableColumn<Trip, Long> paymentIdkolumn;
     @FXML
@@ -52,15 +51,14 @@ public class MainScene implements Initializable {
     public TableView<Trip> table;
     @FXML
     public ComboBox<Station> stationBox;
+    @FXML
     public ComboBox<Card> cardBox;
-
-    private Long chosenVehicleId;
-
-    Vehicle currentVehicle;
     @FXML
     public javafx.scene.control.Label personal_label;
     @FXML
-    private ListView<String> vehiclesStringList;
+    public ListView<Vehicle>rentedList;
+    @FXML
+    private ListView<Vehicle> availableVehiclesList;
     @FXML
     private javafx.scene.control.Button logOutButton;
 
@@ -126,19 +124,67 @@ public class MainScene implements Initializable {
 
         populateTable();
 
-        vehiclesStringList.getItems().addAll(
-                vehicleService.getAllVehicles().stream()
-                        .map(Object::toString).toList()
-        );
 
 
-        vehiclesStringList.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
+
+        availableVehiclesList.setCellFactory(new Callback<ListView<Vehicle>, ListCell<Vehicle>>() {
             @Override
-            public void changed(ObservableValue<? extends String> observableValue, String s, String t1) {
-                chosenVehicle = vehiclesStringList.getSelectionModel().getSelectedItem();
-                chosenVehicleId = Long.parseLong(chosenVehicle.split("\\s+")[0]);
+            public ListCell<Vehicle> call(ListView<Vehicle> param) {
+                return new ListCell<Vehicle>() {
+                    @Override
+                    public void updateItem(Vehicle vehicle, boolean empty) {
+                        super.updateItem(vehicle, empty);
+                        if (empty || vehicle == null) {
+                            setText(null);
+                        } else {
+                            setText(vehicle.getVehicleType().getName().value + " " + vehicle.getBatteryCharge());
+                        }
+                    }
+                };
             }
         });
+        availableVehiclesList.getItems().addAll(vehicleService.getVehiclesByStation(stationBox.getValue()));
+
+
+        availableVehiclesList.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Vehicle>() {
+            @Override
+            public void changed(ObservableValue<? extends Vehicle> observableValue, Vehicle s, Vehicle t1) {
+                System.out.println(availableVehiclesList.getSelectionModel().getSelectedItem());
+            }
+        });
+
+
+        rentedList.setCellFactory(new Callback<>() {
+            @Override
+            public ListCell<Vehicle> call(ListView<Vehicle> param) {
+                return new ListCell<Vehicle>() {
+                    @Override
+                    public void updateItem(Vehicle vehicle, boolean empty) {
+                        super.updateItem(vehicle, empty);
+                        if (empty || vehicle == null) {
+                            setText(null);
+                        } else {
+                            setText(vehicle.getVehicleType().getName().value + " " + vehicle.getBatteryCharge());
+                        }
+                    }
+                };
+            }
+        });
+        rentedList.getItems().addAll(vehicleService.getRentedVehicles(currValues.getCurrentUser()));
+
+
+        rentedList.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Vehicle>() {
+            @Override
+            public void changed(ObservableValue<? extends Vehicle> observableValue, Vehicle s, Vehicle t1) {
+                System.out.println(rentedList.getSelectionModel().getSelectedItem());
+            }
+        });
+
+
+
+
+
+
     }
 
     public void rent(ActionEvent event) {
@@ -155,6 +201,8 @@ public class MainScene implements Initializable {
     public void getCurrentStation(ActionEvent event) {
         Station station = stationBox.getValue();
         currValues.setCurrentStation(station);
+        availableVehiclesList.getItems().setAll(vehicleService.getVehiclesByStation(stationBox.getValue()));
+
     }
 
     public void getCurrentCard(ActionEvent event) {
