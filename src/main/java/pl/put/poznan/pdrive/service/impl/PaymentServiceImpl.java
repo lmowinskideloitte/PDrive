@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import pl.put.poznan.pdrive.entity.Card;
 import pl.put.poznan.pdrive.entity.Payment;
+import pl.put.poznan.pdrive.repository.CardRepository;
 import pl.put.poznan.pdrive.repository.PaymentRepository;
 import pl.put.poznan.pdrive.service.PaymentService;
 
@@ -12,6 +13,7 @@ import pl.put.poznan.pdrive.service.PaymentService;
 public class PaymentServiceImpl implements PaymentService {
 
     private final PaymentRepository paymentRepository;
+    private final CardRepository cardRepository;
 
     @Override
     public Payment createPayment(Card card, Long cost) {
@@ -19,6 +21,7 @@ public class PaymentServiceImpl implements PaymentService {
         payment.setCard(card);
         payment.setCost(cost);
         card.setBalance(card.getBalance() - cost);
+        cardRepository.saveAndFlush(card);
         return paymentRepository.save(payment);
     }
 }
