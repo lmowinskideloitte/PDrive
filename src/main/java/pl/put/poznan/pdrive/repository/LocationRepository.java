@@ -1,4 +1,7 @@
 package pl.put.poznan.pdrive.repository;
 
-public interface LocationRepository {
+import org.springframework.data.jpa.repository.JpaRepository;
+import pl.put.poznan.pdrive.entity.Location;
+
+public interface LocationRepository extends JpaRepository<Location, Long> {
 }
