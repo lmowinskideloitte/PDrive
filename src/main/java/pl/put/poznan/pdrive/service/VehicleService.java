@@ -15,4 +15,5 @@ public interface VehicleService {
 
     Vehicle addVehicle(VehicleType vehicleType, Long tripCount, Long batteryCharge, Station station);
     Vehicle rentVehicle(Vehicle vehicle, User renter);
+    void deleteVehicle(Vehicle vehicle);
 }

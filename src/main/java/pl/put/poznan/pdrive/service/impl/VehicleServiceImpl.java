@@ -55,4 +55,9 @@ public class VehicleServiceImpl implements VehicleService {
         vehicle.setRenter(renter);
         return vehicleRepository.save(vehicle);
     }
+
+    @Override
+    public void deleteVehicle(Vehicle vehicle) {
+        vehicleRepository.deleteById(vehicle.getId());
+    }
 }
