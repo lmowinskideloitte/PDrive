@@ -4,8 +4,8 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import pl.put.poznan.pdrive.entity.Card;
 import pl.put.poznan.pdrive.entity.User;
-import pl.put.poznan.pdrive.entity.UserType;
 import pl.put.poznan.pdrive.repository.UserRepository;
+import pl.put.poznan.pdrive.repository.UserTypeRepository;
 import pl.put.poznan.pdrive.service.UserService;
 
 import java.util.List;
@@ -17,6 +17,7 @@ import static pl.put.poznan.pdrive.entity.UserTypeE.USER;
 public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
+    private final UserTypeRepository userTypeRepository;
 
     @Override
     public User getUser(String username) {
@@ -47,9 +48,7 @@ public class UserServiceImpl implements UserService {
         User user = new User();
         user.setUsername(username);
         user.setPassword(password);
-        UserType userType = new UserType();
-        userType.setRole(USER);
-        user.setUserType(userType);
+        user.setUserType(userTypeRepository.findByRole(USER));
         return userRepository.save(user);
     }
 }
