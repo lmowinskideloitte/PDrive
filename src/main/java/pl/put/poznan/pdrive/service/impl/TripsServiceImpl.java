@@ -19,13 +19,8 @@ public class TripsServiceImpl implements TripsService {
     private final PaymentService paymentService;
 
     @Override
-    public List<Trip> getTrips(Card card) {
-        return tripRepository.findByCard(card);
-    }
-
-    @Override
     public List<Trip> getTrips(User user) {
-        return tripRepository.findByCard_User(user);
+        return tripRepository.findByPayment_Card_User(user);
     }
 
     @Override

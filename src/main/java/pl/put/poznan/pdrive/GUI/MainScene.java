@@ -57,6 +57,7 @@ public class MainScene implements Initializable {
     public javafx.scene.control.Label personal_label;
     @FXML
     public ListView<Vehicle> rentedList;
+    public Button returnVehicleBatton;
     @FXML
     private ListView<Vehicle> availableVehiclesList;
     @FXML
@@ -118,15 +119,15 @@ public class MainScene implements Initializable {
         ObservableList<Station> stations = FXCollections.observableArrayList(stationsService.getAllStations());
         stationBox.setItems(stations);
         stationBox.getSelectionModel().selectFirst();
+        currValues.setCurrentStation(stationBox.getValue());
+
 
         ObservableList<Card> cards = FXCollections.observableArrayList(cardService.getCards(currValues.getCurrentUser()));
         cardBox.setItems(cards);
         cardBox.getSelectionModel().selectFirst();
-
+        currValues.setCurrentCard(cardBox.getValue());
 
         populateTable();
-
-
         updateAvailableList();
         updateRentedList();
     }
@@ -213,5 +214,13 @@ public class MainScene implements Initializable {
     public void getCurrentCard(ActionEvent event) {
         Card card = cardBox.getValue();
         currValues.setCurrentCard(card);
+    }
+
+    public void onReturnVehicleBatton(ActionEvent event) {
+        if(currValues.getRentedVehicle() != null && currValues.getCurrentCard()!=null) {
+            tripsService.addTrip(currValues.getRentedVehicle(),currValues.getCurrentStation(),currValues.getCurrentCard());
+        }
+        updateRentedList();
+        updateAvailableList();
     }
 }

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="517.0" prefWidth="993.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pl.put.poznan.pdrive.GUI.AdminPanel">
+   <children>
+      <Button layoutX="779.0" layoutY="38.0" mnemonicParsing="false" prefHeight="104.0" prefWidth="185.0" text="Add vehicle" />
+      <Button layoutX="779.0" layoutY="159.0" mnemonicParsing="false" prefHeight="112.0" prefWidth="185.0" text="Add station" />
+      <ComboBox layoutX="45.0" layoutY="38.0" prefWidth="150.0" />
+      <ComboBox layoutX="232.0" layoutY="38.0" prefWidth="150.0" />
+   </children>
+</AnchorPane>

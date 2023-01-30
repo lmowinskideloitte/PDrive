@@ -8,6 +8,6 @@ import pl.put.poznan.pdrive.entity.User;
 import java.util.List;
 
 public interface TripRepository extends JpaRepository<Trip, Long> {
-    List<Trip> findByCard_User(User user);
-    List<Trip> findByCard(Card card);
+
+    List<Trip> findByPayment_Card_User(User user);
 }
