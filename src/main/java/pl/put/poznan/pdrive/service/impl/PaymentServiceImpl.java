@@ -21,7 +21,6 @@ public class PaymentServiceImpl implements PaymentService {
         payment.setCard(card);
         payment.setCost(cost);
         card.setBalance(card.getBalance() - cost);
-        cardRepository.save(card);
         return paymentRepository.save(payment);
     }
 }
