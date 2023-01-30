@@ -31,15 +31,11 @@ public class TripsServiceImpl implements TripsService {
     public Trip addTrip(Vehicle vehicle, Station station, Card card) {
         Random random = new Random();
         Long distance = random.nextLong(1, 100);
-        Trip trip = new Trip();
-        trip.setOriginStation(vehicle.getStation());
-        vehicle.setStation(station);
+        Station originStation = vehicle.getStation();
         vehicle.setRenter(null);
-        trip.setDistance(distance);
-        trip.setDestinationStation(station);
-        trip.setPayment(paymentService.createPayment(card, distance*3));
-        trip.setCard(trip.getPayment().getCard());
-        trip.setVehicle(vehicle);
+        vehicle.setStation(station);
+
+        Trip trip = new Trip(paymentService.createPayment(card, distance), vehicle, originStation, station, distance, null);
         return tripRepository.save(trip);
     }
 }

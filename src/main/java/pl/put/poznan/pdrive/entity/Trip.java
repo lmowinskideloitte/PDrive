@@ -2,6 +2,7 @@ package pl.put.poznan.pdrive.entity;
 
 import jakarta.persistence.*;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.LinkedHashSet;
@@ -10,6 +11,7 @@ import java.util.Set;
 @Entity
 @Getter
 @Setter
+@NoArgsConstructor
 @Table(name = "trips")
 public class Trip {
 
@@ -17,10 +19,6 @@ public class Trip {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Long id;
-
-    @ManyToOne(cascade = CascadeType.ALL, optional = false)
-    @JoinColumn(name = "card_id", nullable = false)
-    private Card card;
 
     @OneToOne(cascade = CascadeType.ALL, optional = false, orphanRemoval = true)
     @JoinColumn(name = "payment_id", nullable = false)
@@ -44,4 +42,12 @@ public class Trip {
     @OneToMany(mappedBy = "trip", orphanRemoval = true)
     private Set<Event> events = new LinkedHashSet<>();
 
+    public Trip(Payment payment, Vehicle vehicle, Station originStation, Station destinationStation, Long distance, Set<Event> events) {
+        this.payment = payment;
+        this.vehicle = vehicle;
+        this.originStation = originStation;
+        this.destinationStation = destinationStation;
+        this.distance = distance;
+        this.events = events;
+    }
 }
