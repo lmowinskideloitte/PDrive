@@ -13,6 +13,8 @@ import pl.put.poznan.pdrive.StageInitializer;
 import pl.put.poznan.pdrive.entity.User;
 import pl.put.poznan.pdrive.service.UserService;
 
+import java.util.Objects;
+
 
 @Controller
 public class Login {
@@ -37,6 +39,9 @@ public class Login {
     @Value("classpath:/main_scene.fxml")
     Resource main_scene_Resource;
 
+    @Value("classpath:/AdminPanel.fxml")
+    Resource adminSceneResource;
+
     public Login(StageInitializer stageInitializer, UserService userService, CurrValues currValues) {
         this.stageInitializer = stageInitializer;
         this.userService = userService;
@@ -48,10 +53,19 @@ public class Login {
         if (user != null) {
             loginLabel.setText("Success!");
             currValues.setCurrentUser(user);
-            switchToMainScene(event);
+            if(Objects.equals(usernameField.getText(), "admin") && Objects.equals(passwordField.getText(), "admin")){ //TODO userService Find user by role
+                switchToAdminScene(event);
+            }
+            else {
+                switchToMainScene(event);
+            }
         } else {
             loginLabel.setText("Try again");
         }
+    }
+
+    private void switchToAdminScene(ActionEvent event) {
+        stageInitializer.switchScene(adminSceneResource);
     }
 
     public void switchToMainScene(ActionEvent event){
@@ -61,4 +75,5 @@ public class Login {
     public void switchToRegister(ActionEvent event) {
         stageInitializer.switchScene(registerResource);
     }
+
 }

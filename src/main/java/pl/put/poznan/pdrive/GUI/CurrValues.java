@@ -17,5 +17,7 @@ public class CurrValues {
     private Vehicle rentedVehicle;
     private Station currentStation;
     private Card currentCard;
+    private Long currentValueTripCountSpinner;
 
+    private Long currentValueBatteryChargeSpinner;
 }
