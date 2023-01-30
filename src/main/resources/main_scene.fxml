@@ -21,11 +21,11 @@
             <Font size="48.0" />
          </font></Label>
       <Button fx:id="rentButton" layoutX="451.0" layoutY="294.0" mnemonicParsing="false" onAction="#rent" prefHeight="99.0" prefWidth="92.0" text="Wynajmij" />
-      <ListView fx:id="myListView" layoutX="9.0" layoutY="294.0" prefHeight="207.0" prefWidth="437.0" />
+      <ListView fx:id="vehiclesStringList" layoutX="9.0" layoutY="294.0" prefHeight="207.0" prefWidth="437.0" />
       <Button fx:id="logOutButton" layoutX="922.0" layoutY="18.0" mnemonicParsing="false" onAction="#setLogOutButton" prefHeight="55.0" prefWidth="57.0" text="Log out" />
-      <Label fx:id="personal_label1" layoutX="65.0" layoutY="15.0" prefHeight="62.0" prefWidth="110.0" text="//CARD " />
+      <Label fx:id="cardLabel" layoutX="65.0" layoutY="15.0" prefHeight="62.0" prefWidth="110.0" text="//CARD " />
       <Button fx:id="refreshButton" layoutY="2.0" mnemonicParsing="false" onAction="#setValues" text="refresh" textFill="RED" />
       <Button layoutX="451.0" layoutY="398.0" mnemonicParsing="false" prefHeight="99.0" prefWidth="92.0" text="Button" />
-      <ComboBox layoutX="657.0" layoutY="15.0" prefHeight="25.0" prefWidth="251.0" />
+      <ComboBox fx:id="stationBox" layoutX="657.0" layoutY="15.0" onAction="#getCurrentStation" prefHeight="25.0" prefWidth="251.0" />
    </children>
 </AnchorPane>

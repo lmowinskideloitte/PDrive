@@ -7,10 +7,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.ListView;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.Resource;
@@ -19,6 +16,7 @@ import pl.put.poznan.pdrive.StageInitializer;
 import pl.put.poznan.pdrive.entity.Station;
 import pl.put.poznan.pdrive.entity.Trip;
 import pl.put.poznan.pdrive.entity.Vehicle;
+import pl.put.poznan.pdrive.service.StationsService;
 import pl.put.poznan.pdrive.service.TripsService;
 import pl.put.poznan.pdrive.service.UserService;
 import pl.put.poznan.pdrive.service.VehicleService;
@@ -35,6 +33,8 @@ public class MainScene implements Initializable {
     private final TripsService tripsService;
     public final VehicleService vehicleService;
     public final CurrValues currValues;
+
+    public final StationsService stationsService;
     public Button rentButton;
     public Button refreshButton;
     public String chosenVehicle;
@@ -51,6 +51,8 @@ public class MainScene implements Initializable {
 
     @FXML
     public TableView<Trip> table;
+    @FXML
+    public ComboBox<Station> stationBox;
 
     private Long chosenVehicleId;
 
@@ -58,7 +60,7 @@ public class MainScene implements Initializable {
     @FXML
     public javafx.scene.control.Label personal_label;
     @FXML
-    private ListView<String> myListView;
+    private ListView<String> vehiclesStringList;
     @FXML
     private javafx.scene.control.Button logOutButton;
 
@@ -66,16 +68,17 @@ public class MainScene implements Initializable {
     @Value("classpath:/login.fxml")
     Resource loginResource;
 
-    public MainScene(StageInitializer stageInitializer, UserService userService, TripsService tripsService, VehicleService vehicleService, CurrValues currValues) {
+    public MainScene(StageInitializer stageInitializer, UserService userService, TripsService tripsService, VehicleService vehicleService, CurrValues currValues, StationsService stationsService) {
         this.stageInitializer = stageInitializer;
         this.userService = userService;
         this.tripsService = tripsService;
         this.vehicleService = vehicleService;
         this.currValues = currValues;
+        this.stationsService = stationsService;
     }
 
     public void makeTable() {
-        paymentIdkolumn = new TableColumn<Trip, Long>("payment");
+        paymentIdkolumn = new TableColumn<Trip, Long>("payment [zł]");
         paymentIdkolumn.setCellValueFactory(new PropertyValueFactory<>("payment"));
 
         originStationIdKolumn = new TableColumn<Trip, Station>("origin Station");
@@ -84,7 +87,7 @@ public class MainScene implements Initializable {
         destinationStationKolumn = new TableColumn<Trip, Station>("destination Station");
         destinationStationKolumn.setCellValueFactory(new PropertyValueFactory<>("destinationStation"));
 
-        distanceKolumn = new TableColumn<Trip, Long>("distance");
+        distanceKolumn = new TableColumn<Trip, Long>("distance [km]");
         distanceKolumn.setCellValueFactory(new PropertyValueFactory<>("distance"));
 
         vehicleIdKolumn = new TableColumn<Trip, Vehicle>("Vehicle id");
@@ -114,15 +117,19 @@ public class MainScene implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        myListView.getItems().addAll(
+        ObservableList<Station> stations = FXCollections.observableArrayList(stationsService.getAllStations());
+        stationBox.setItems(stations);
+
+        vehiclesStringList.getItems().addAll(
                 vehicleService.getAllVehicles().stream()
                         .map(Object::toString).toList()
         );
 
-        myListView.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
+
+        vehiclesStringList.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observableValue, String s, String t1) {
-                chosenVehicle = myListView.getSelectionModel().getSelectedItem();
+                chosenVehicle = vehiclesStringList.getSelectionModel().getSelectedItem();
                 chosenVehicleId = Long.parseLong(chosenVehicle.split("\\s+")[0]);
             }
         });
@@ -137,5 +144,10 @@ public class MainScene implements Initializable {
             personal_label.setText(currValues.getCurrentUser().getUsername());
             populateTable();
         }
+    }
+
+    public void getCurrentStation(ActionEvent event) {
+        Station station = stationBox.getValue();
+        currValues.setCurrentStation(station);
     }
 }
