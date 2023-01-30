@@ -1,5 +1,6 @@
 package pl.put.poznan.pdrive.service.impl;
 
+import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import pl.put.poznan.pdrive.entity.Card;
@@ -16,12 +17,14 @@ public class PaymentServiceImpl implements PaymentService {
     private final CardRepository cardRepository;
 
     @Override
+    @Transactional
     public Payment createPayment(Card card, Long cost) {
         Payment payment = new Payment();
         payment.setCard(card);
         payment.setCost(cost);
         card.setBalance(card.getBalance() - cost);
-        cardRepository.saveAndFlush(card);
-        return paymentRepository.save(payment);
+        payment = paymentRepository.save(payment);
+        cardRepository.save(card);
+        return payment;
     }
 }
