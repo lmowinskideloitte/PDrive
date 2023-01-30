@@ -13,13 +13,11 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Controller;
 import pl.put.poznan.pdrive.StageInitializer;
+import pl.put.poznan.pdrive.entity.Card;
 import pl.put.poznan.pdrive.entity.Station;
 import pl.put.poznan.pdrive.entity.Trip;
 import pl.put.poznan.pdrive.entity.Vehicle;
-import pl.put.poznan.pdrive.service.StationsService;
-import pl.put.poznan.pdrive.service.TripsService;
-import pl.put.poznan.pdrive.service.UserService;
-import pl.put.poznan.pdrive.service.VehicleService;
+import pl.put.poznan.pdrive.service.*;
 
 import java.net.URL;
 import java.util.List;
@@ -28,7 +26,8 @@ import java.util.ResourceBundle;
 @Controller
 public class MainScene implements Initializable {
     private final StageInitializer stageInitializer;
-    private final UserService userService;
+
+    private final CardService cardService;
 
     private final TripsService tripsService;
     public final VehicleService vehicleService;
@@ -53,6 +52,7 @@ public class MainScene implements Initializable {
     public TableView<Trip> table;
     @FXML
     public ComboBox<Station> stationBox;
+    public ComboBox<Card> cardBox;
 
     private Long chosenVehicleId;
 
@@ -68,9 +68,9 @@ public class MainScene implements Initializable {
     @Value("classpath:/login.fxml")
     Resource loginResource;
 
-    public MainScene(StageInitializer stageInitializer, UserService userService, TripsService tripsService, VehicleService vehicleService, CurrValues currValues, StationsService stationsService) {
+    public MainScene(StageInitializer stageInitializer, CardService cardService, TripsService tripsService, VehicleService vehicleService, CurrValues currValues, StationsService stationsService) {
         this.stageInitializer = stageInitializer;
-        this.userService = userService;
+        this.cardService = cardService;
         this.tripsService = tripsService;
         this.vehicleService = vehicleService;
         this.currValues = currValues;
@@ -120,6 +120,12 @@ public class MainScene implements Initializable {
         ObservableList<Station> stations = FXCollections.observableArrayList(stationsService.getAllStations());
         stationBox.setItems(stations);
 
+        ObservableList<Card> cards = FXCollections.observableArrayList(cardService.getCards(currValues.getCurrentUser()));
+        cardBox.setItems(cards);
+
+
+        populateTable();
+
         vehiclesStringList.getItems().addAll(
                 vehicleService.getAllVehicles().stream()
                         .map(Object::toString).toList()
@@ -149,5 +155,10 @@ public class MainScene implements Initializable {
     public void getCurrentStation(ActionEvent event) {
         Station station = stationBox.getValue();
         currValues.setCurrentStation(station);
+    }
+
+    public void getCurrentCard(ActionEvent event) {
+        Card card = cardBox.getValue();
+        currValues.setCurrentCard(card);
     }
 }
