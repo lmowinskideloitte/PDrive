@@ -2,19 +2,20 @@ package pl.put.poznan.pdrive.service.impl;
 
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
-import pl.put.poznan.pdrive.entity.Card;
-import pl.put.poznan.pdrive.entity.Trip;
-import pl.put.poznan.pdrive.entity.User;
+import pl.put.poznan.pdrive.entity.*;
 import pl.put.poznan.pdrive.repository.TripRepository;
+import pl.put.poznan.pdrive.service.PaymentService;
 import pl.put.poznan.pdrive.service.TripsService;
 
 import java.util.List;
+import java.util.Random;
 
 @Service
 @AllArgsConstructor
 public class TripsServiceImpl implements TripsService {
 
     private final TripRepository tripRepository;
+    private final PaymentService paymentService;
 
     @Override
     public List<Trip> getTrips(Card card) {
@@ -27,7 +28,16 @@ public class TripsServiceImpl implements TripsService {
     }
 
     @Override
-    public Trip addTrip(Trip trip) {
+    public Trip addTrip(Vehicle vehicle, Station station, Card card) {
+        Random random = new Random();
+        Long distance = random.nextLong(1, 100);
+        Trip trip = new Trip();
+        trip.setCard(card);
+        trip.setOriginStation(vehicle.getStation());
+        trip.setDistance(distance);
+        trip.setDestinationStation(station);
+        trip.setPayment(paymentService.createPayment(card, distance*3));
+        trip.setVehicle(vehicle);
         return tripRepository.save(trip);
     }
 }
