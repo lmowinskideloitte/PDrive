@@ -13,4 +13,5 @@ public interface VehicleService {
     List<Vehicle> getRentedVehicles(User user);
 
     Vehicle addVehicle();
+    Vehicle rentVehicle(Vehicle vehicle, User renter);
 }

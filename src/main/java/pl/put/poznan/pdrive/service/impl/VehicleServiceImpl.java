@@ -36,4 +36,11 @@ public class VehicleServiceImpl implements VehicleService {
     public Vehicle addVehicle() {
         return vehicleRepository.save(new Vehicle());
     }
+
+    @Override
+    public Vehicle rentVehicle(Vehicle vehicle, User renter) {
+        vehicle.setStation(null);
+        vehicle.setRenter(renter);
+        return vehicleRepository.save(vehicle);
+    }
 }
