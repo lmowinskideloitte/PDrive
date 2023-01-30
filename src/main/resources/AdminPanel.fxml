@@ -5,10 +5,12 @@
 
 <AnchorPane prefHeight="517.0" prefWidth="993.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pl.put.poznan.pdrive.GUI.AdminPanel">
    <children>
-      <Button layoutX="794.0" layoutY="14.0" mnemonicParsing="false" prefHeight="104.0" prefWidth="185.0" text="Add vehicle" />
-      <Button layoutX="794.0" layoutY="129.0" mnemonicParsing="false" prefHeight="112.0" prefWidth="185.0" text="Add station" />
-      <ComboBox fx:id="vehicleType" layoutX="20.0" layoutY="14.0" onAction="#onVehicleType" prefHeight="25.0" prefWidth="244.0" promptText="Vehicle type" />
-      <Spinner fx:id="tripCount" layoutX="274.0" layoutY="14.0" prefHeight="25.0" prefWidth="244.0" />
-      <Spinner fx:id="batteryCharge" layoutX="526.0" layoutY="14.0" prefHeight="25.0" prefWidth="244.0" />
+      <Button fx:id="addVehicleButton" layoutX="794.0" layoutY="39.0" mnemonicParsing="false" onAction="#onAddVehicleButton" prefHeight="104.0" prefWidth="94.0" text="Add vehicle" />
+      <Button layoutX="794.0" layoutY="147.0" mnemonicParsing="false" prefHeight="112.0" prefWidth="185.0" text="Add station" />
+      <ComboBox fx:id="vehicleType" layoutX="14.0" layoutY="39.0" onAction="#onVehicleType" prefHeight="25.0" prefWidth="244.0" promptText="Vehicle type" />
+      <Spinner fx:id="tripCount" editable="true" layoutX="273.0" layoutY="39.0" prefHeight="25.0" prefWidth="244.0" />
+      <Spinner fx:id="batteryCharge" editable="true" layoutX="526.0" layoutY="39.0" prefHeight="25.0" prefWidth="244.0" />
+      <Button fx:id="logOutButton" layoutX="927.0" layoutY="8.0" mnemonicParsing="false" onAction="#onLogOutButton" text="Log out" />
+      <Button fx:id="deleteVehicleButton" layoutX="894.0" layoutY="39.0" mnemonicParsing="false" onAction="#onDeleteVehicleButton" prefHeight="104.0" prefWidth="94.0" text="delete vehicle" />
    </children>
 </AnchorPane>
