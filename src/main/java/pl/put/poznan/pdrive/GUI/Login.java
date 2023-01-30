@@ -53,7 +53,7 @@ public class Login {
         if (user != null) {
             loginLabel.setText("Success!");
             currValues.setCurrentUser(user);
-            if(Objects.equals(usernameField.getText(), "admin") && Objects.equals(passwordField.getText(), "admin")){
+            if(Objects.equals(usernameField.getText(), "admin") && Objects.equals(passwordField.getText(), "admin")){ //TODO userService Find user by role
                 switchToAdminScene(event);
             }
             else {

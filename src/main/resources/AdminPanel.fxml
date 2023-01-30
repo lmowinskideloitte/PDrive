@@ -2,15 +2,35 @@
 
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
 
 <AnchorPane prefHeight="517.0" prefWidth="993.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pl.put.poznan.pdrive.GUI.AdminPanel">
    <children>
-      <Button fx:id="addVehicleButton" layoutX="794.0" layoutY="39.0" mnemonicParsing="false" onAction="#onAddVehicleButton" prefHeight="104.0" prefWidth="94.0" text="Add vehicle" />
-      <Button layoutX="794.0" layoutY="147.0" mnemonicParsing="false" prefHeight="112.0" prefWidth="185.0" text="Add station" />
-      <ComboBox fx:id="vehicleType" layoutX="14.0" layoutY="39.0" onAction="#onVehicleType" prefHeight="25.0" prefWidth="244.0" promptText="Vehicle type" />
-      <Spinner fx:id="tripCount" editable="true" layoutX="273.0" layoutY="39.0" prefHeight="25.0" prefWidth="244.0" />
-      <Spinner fx:id="batteryCharge" editable="true" layoutX="526.0" layoutY="39.0" prefHeight="25.0" prefWidth="244.0" />
+      <Button fx:id="addVehicleButton" layoutX="794.0" layoutY="39.0" mnemonicParsing="false" onAction="#onAddVehicleButton" prefHeight="71.0" prefWidth="185.0" text="Add vehicle" />
+      <Button layoutX="794.0" layoutY="272.0" mnemonicParsing="false" prefHeight="78.0" prefWidth="185.0" text="Add station" />
+      <ComboBox fx:id="vehicleType" layoutX="15.0" layoutY="78.0" onAction="#onVehicleType" prefHeight="25.0" prefWidth="244.0" promptText="Vehicle type" />
+      <Spinner fx:id="tripCountSpinner" editable="true" layoutX="281.0" layoutY="78.0" prefHeight="25.0" prefWidth="244.0" />
+      <Spinner fx:id="batteryChargeSpinner" editable="true" layoutX="535.0" layoutY="78.0" prefHeight="25.0" prefWidth="244.0" />
       <Button fx:id="logOutButton" layoutX="927.0" layoutY="8.0" mnemonicParsing="false" onAction="#onLogOutButton" text="Log out" />
-      <Button fx:id="deleteVehicleButton" layoutX="894.0" layoutY="39.0" mnemonicParsing="false" onAction="#onDeleteVehicleButton" prefHeight="104.0" prefWidth="94.0" text="delete vehicle" />
+      <Button fx:id="deleteVehicleButton" layoutX="794.0" layoutY="123.0" mnemonicParsing="false" onAction="#onDeleteVehicleButton" prefHeight="71.0" prefWidth="185.0" text="delete vehicle" />
+      <Label layoutX="61.0" layoutY="43.0" prefHeight="27.0" prefWidth="153.0" text="Enter vehicle type">
+         <font>
+            <Font size="18.0" />
+         </font></Label>
+      <Label layoutX="322.0" layoutY="43.0" prefHeight="27.0" prefWidth="162.0" text="Enter trip count" textAlignment="CENTER">
+         <font>
+            <Font size="18.0" />
+         </font></Label>
+      <Label layoutX="586.0" layoutY="43.0" prefHeight="27.0" prefWidth="170.0" text="Enter battery charge">
+         <font>
+            <Font size="18.0" />
+         </font></Label>
+      <Label layoutX="435.0" layoutY="-2.0" prefHeight="46.0" prefWidth="236.0" text="Admin" textFill="#2935e1">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Line endX="987.0" layoutX="5.0" layoutY="117.0" startX="-100.0" />
    </children>
 </AnchorPane>
