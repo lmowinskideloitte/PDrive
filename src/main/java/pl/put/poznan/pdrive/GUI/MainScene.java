@@ -56,7 +56,7 @@ public class MainScene implements Initializable {
     @FXML
     public javafx.scene.control.Label personal_label;
     @FXML
-    public ListView<Vehicle>rentedList;
+    public ListView<Vehicle> rentedList;
     @FXML
     private ListView<Vehicle> availableVehiclesList;
     @FXML
@@ -117,43 +117,21 @@ public class MainScene implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         ObservableList<Station> stations = FXCollections.observableArrayList(stationsService.getAllStations());
         stationBox.setItems(stations);
+        stationBox.getSelectionModel().selectFirst();
 
         ObservableList<Card> cards = FXCollections.observableArrayList(cardService.getCards(currValues.getCurrentUser()));
         cardBox.setItems(cards);
+        cardBox.getSelectionModel().selectFirst();
 
 
         populateTable();
 
 
+        updateAvailableList();
+        updateRentedList();
+    }
 
-
-        availableVehiclesList.setCellFactory(new Callback<ListView<Vehicle>, ListCell<Vehicle>>() {
-            @Override
-            public ListCell<Vehicle> call(ListView<Vehicle> param) {
-                return new ListCell<Vehicle>() {
-                    @Override
-                    public void updateItem(Vehicle vehicle, boolean empty) {
-                        super.updateItem(vehicle, empty);
-                        if (empty || vehicle == null) {
-                            setText(null);
-                        } else {
-                            setText(vehicle.getVehicleType().getName().value + " " + vehicle.getBatteryCharge());
-                        }
-                    }
-                };
-            }
-        });
-        availableVehiclesList.getItems().addAll(vehicleService.getVehiclesByStation(stationBox.getValue()));
-
-
-        availableVehiclesList.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Vehicle>() {
-            @Override
-            public void changed(ObservableValue<? extends Vehicle> observableValue, Vehicle s, Vehicle t1) {
-                System.out.println(availableVehiclesList.getSelectionModel().getSelectedItem());
-            }
-        });
-
-
+    private void updateRentedList() {
         rentedList.setCellFactory(new Callback<>() {
             @Override
             public ListCell<Vehicle> call(ListView<Vehicle> param) {
@@ -170,31 +148,58 @@ public class MainScene implements Initializable {
                 };
             }
         });
-        rentedList.getItems().addAll(vehicleService.getRentedVehicles(currValues.getCurrentUser()));
+        rentedList.getItems().setAll(vehicleService.getRentedVehicles(currValues.getCurrentUser()));
 
 
         rentedList.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Vehicle>() {
             @Override
             public void changed(ObservableValue<? extends Vehicle> observableValue, Vehicle s, Vehicle t1) {
-                System.out.println(rentedList.getSelectionModel().getSelectedItem());
+                currValues.setRentedVehicle(rentedList.getSelectionModel().getSelectedItem());
             }
         });
+    }
+    private void updateAvailableList() {
+        availableVehiclesList.setCellFactory(new Callback<ListView<Vehicle>, ListCell<Vehicle>>() {
+            @Override
+            public ListCell<Vehicle> call(ListView<Vehicle> param) {
+                return new ListCell<Vehicle>() {
+                    @Override
+                    public void updateItem(Vehicle vehicle, boolean empty) {
+                        super.updateItem(vehicle, empty);
+                        if (empty || vehicle == null) {
+                            setText(null);
+                        } else {
+                            setText(vehicle.getVehicleType().getName().value + " " + vehicle.getBatteryCharge());
+                        }
+                    }
+                };
+            }
+        });
+        availableVehiclesList.getItems().setAll(vehicleService.getVehiclesByStation(stationBox.getValue()));
 
 
-
-
-
-
+        availableVehiclesList.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Vehicle>() {
+            @Override
+            public void changed(ObservableValue<? extends Vehicle> observableValue, Vehicle s, Vehicle t1) {
+                currValues.setCurrentVehicle(availableVehiclesList.getSelectionModel().getSelectedItem());
+            }
+        });
     }
 
     public void rent(ActionEvent event) {
-        //TODO
+        if (currValues.getCurrentVehicle() != null) {
+            vehicleService.rentVehicle(currValues.getCurrentVehicle(), currValues.getCurrentUser());
+            updateRentedList();
+            updateAvailableList();
+        }
     }
 
     public void setValues(ActionEvent event) {
         if (currValues.getCurrentUser() != null) {
             personal_label.setText(currValues.getCurrentUser().getUsername());
             populateTable();
+            updateRentedList();
+            updateAvailableList();
         }
     }
 

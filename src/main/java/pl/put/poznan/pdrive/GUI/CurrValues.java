@@ -14,6 +14,8 @@ import pl.put.poznan.pdrive.entity.Vehicle;
 public class CurrValues {
     private User currentUser;
     private Vehicle currentVehicle;
+    private Vehicle rentedVehicle;
     private Station currentStation;
     private Card currentCard;
+
 }
