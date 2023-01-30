@@ -1,5 +1,6 @@
 package pl.put.poznan.pdrive.service.impl;
 
+import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import pl.put.poznan.pdrive.entity.*;
@@ -28,6 +29,7 @@ public class TripsServiceImpl implements TripsService {
     }
 
     @Override
+    @Transactional
     public Trip addTrip(Vehicle vehicle, Station station, Card card) {
         Random random = new Random();
         Long distance = random.nextLong(1, 100);
