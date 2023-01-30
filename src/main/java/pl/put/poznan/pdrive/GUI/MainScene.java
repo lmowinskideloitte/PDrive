@@ -18,7 +18,10 @@ import pl.put.poznan.pdrive.entity.Card;
 import pl.put.poznan.pdrive.entity.Station;
 import pl.put.poznan.pdrive.entity.Trip;
 import pl.put.poznan.pdrive.entity.Vehicle;
-import pl.put.poznan.pdrive.service.*;
+import pl.put.poznan.pdrive.service.CardService;
+import pl.put.poznan.pdrive.service.StationsService;
+import pl.put.poznan.pdrive.service.TripsService;
+import pl.put.poznan.pdrive.service.VehicleService;
 
 import java.net.URL;
 import java.util.List;
@@ -159,6 +162,7 @@ public class MainScene implements Initializable {
             }
         });
     }
+
     private void updateAvailableList() {
         availableVehiclesList.setCellFactory(new Callback<ListView<Vehicle>, ListCell<Vehicle>>() {
             @Override
@@ -217,8 +221,8 @@ public class MainScene implements Initializable {
     }
 
     public void onReturnVehicleBatton(ActionEvent event) {
-        if(currValues.getRentedVehicle() != null && currValues.getCurrentCard()!=null) {
-            tripsService.addTrip(currValues.getRentedVehicle(),currValues.getCurrentStation(),currValues.getCurrentCard());
+        if (currValues.getRentedVehicle() != null && currValues.getCurrentCard() != null) {
+            tripsService.addTrip(currValues.getRentedVehicle(), currValues.getCurrentStation(), currValues.getCurrentCard());
         }
         updateRentedList();
         updateAvailableList();

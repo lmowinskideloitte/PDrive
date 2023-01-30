@@ -8,6 +8,6 @@ import pl.put.poznan.pdrive.entity.Vehicle;
 import java.util.List;
 
 public interface VehicleRepository extends JpaRepository<Vehicle, Long> {
-    List<Vehicle> findByRenterAndStationNull(User renter);
-    List<Vehicle> findByStation(Station station);
+    List<Vehicle> findByRenter(User renter);
+    List<Vehicle> findByStationAndRenterNull(Station station);
 }

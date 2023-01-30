@@ -24,12 +24,12 @@ public class VehicleServiceImpl implements VehicleService {
 
     @Override
     public List<Vehicle> getVehiclesByStation(Station station) {
-        return vehicleRepository.findByStation(station);
+        return vehicleRepository.findByStationAndRenterNull(station);
     }
 
     @Override
     public List<Vehicle> getRentedVehicles(User user) {
-        return vehicleRepository.findByRenterAndStationNull(user);
+        return vehicleRepository.findByRenter(user);
     }
 
     @Override
@@ -39,7 +39,6 @@ public class VehicleServiceImpl implements VehicleService {
 
     @Override
     public Vehicle rentVehicle(Vehicle vehicle, User renter) {
-        vehicle.setStation(null);
         vehicle.setRenter(renter);
         return vehicleRepository.save(vehicle);
     }
