@@ -5,7 +5,10 @@ import org.springframework.stereotype.Service;
 import pl.put.poznan.pdrive.entity.Station;
 import pl.put.poznan.pdrive.entity.User;
 import pl.put.poznan.pdrive.entity.Vehicle;
+import pl.put.poznan.pdrive.entity.VehicleType;
+import pl.put.poznan.pdrive.repository.StationRepository;
 import pl.put.poznan.pdrive.repository.VehicleRepository;
+import pl.put.poznan.pdrive.repository.VehicleTypeRepository;
 import pl.put.poznan.pdrive.service.VehicleService;
 
 import java.util.List;
@@ -15,6 +18,8 @@ import java.util.List;
 public class VehicleServiceImpl implements VehicleService {
 
     public final VehicleRepository vehicleRepository;
+    private final VehicleTypeRepository vehicleTypeRepository;
+    private final StationRepository stationRepository;
 
 
     @Override
@@ -33,8 +38,16 @@ public class VehicleServiceImpl implements VehicleService {
     }
 
     @Override
-    public Vehicle addVehicle() {
-        return vehicleRepository.save(new Vehicle());
+    public Vehicle addVehicle(VehicleType vehicleType, Long tripCount, Long batteryCharge, Station station) {
+        VehicleType byName = vehicleTypeRepository.findByName(vehicleType.getName());
+        Station byId = stationRepository.findById(station.getId()).orElseThrow();
+        Vehicle vehicle = new Vehicle();
+        vehicle.setStation(byId);
+        vehicle.setVehicleType(byName);
+        vehicle.setTripCount(tripCount);
+        vehicle.setBatteryCharge(batteryCharge);
+
+        return vehicleRepository.save(vehicle);
     }
 
     @Override
