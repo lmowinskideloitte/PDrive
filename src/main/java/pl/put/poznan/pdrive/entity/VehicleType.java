@@ -23,4 +23,9 @@ public class VehicleType {
 
     @Column(name = "description")
     private String description;
+
+    @Override
+    public String toString(){
+        return "%s".formatted(name.value);
+    }
 }

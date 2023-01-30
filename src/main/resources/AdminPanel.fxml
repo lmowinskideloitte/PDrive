@@ -13,7 +13,7 @@
       <Spinner fx:id="tripCountSpinner" editable="true" layoutX="215.0" layoutY="78.0" prefHeight="25.0" prefWidth="170.0" />
       <Spinner fx:id="batteryChargeSpinner" editable="true" layoutX="412.0" layoutY="78.0" prefHeight="25.0" prefWidth="170.0" />
       <Button fx:id="logOutButton" layoutX="927.0" layoutY="8.0" mnemonicParsing="false" onAction="#onLogOutButton" text="Log out" />
-      <Button fx:id="deleteVehicleButton" layoutX="799.0" layoutY="425.0" mnemonicParsing="false" onAction="#onDeleteVehicleButton" prefHeight="71.0" prefWidth="185.0" text="delete vehicle" />
+      <Button fx:id="deleteVehicleButton" layoutX="794.0" layoutY="214.0" mnemonicParsing="false" onAction="#onDeleteVehicleButton" prefHeight="337.0" prefWidth="185.0" text="delete vehicle" />
       <Label layoutX="20.0" layoutY="43.0" prefHeight="27.0" prefWidth="143.0" text="Enter vehicle type">
          <font>
             <Font size="18.0" />
@@ -51,5 +51,21 @@
             <Font size="18.0" />
          </font>
       </Label>
+      <Label fx:id="addVehicleLabel" layoutX="808.0" layoutY="43.0" prefHeight="17.0" prefWidth="162.0">
+         <font>
+            <Font size="13.0" />
+         </font>
+      </Label>
+      <Label fx:id="addStationLabel" layoutX="808.0" layoutY="126.0" prefHeight="17.0" prefWidth="151.0">
+         <font>
+            <Font size="13.0" />
+         </font>
+      </Label>
+      <TableView fx:id="table" layoutX="20.0" layoutY="206.0" prefHeight="348.0" prefWidth="755.0">
+        <columns>
+          <TableColumn prefWidth="75.0" text="C1" />
+          <TableColumn prefWidth="75.0" text="C2" />
+        </columns>
+      </TableView>
    </children>
 </AnchorPane>

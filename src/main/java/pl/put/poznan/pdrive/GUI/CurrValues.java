@@ -17,4 +17,6 @@ public class CurrValues {
     private Long currentValueTripCountSpinner;
     private Long currentValueBatteryChargeSpinner;
     private VehicleType currentVehicleType;
+    private Location currentLocation;
+    private String currentAdress;
 }

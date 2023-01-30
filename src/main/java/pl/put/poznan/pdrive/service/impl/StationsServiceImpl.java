@@ -1,5 +1,6 @@
 package pl.put.poznan.pdrive.service.impl;
 
+import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import pl.put.poznan.pdrive.entity.Location;
@@ -23,6 +24,7 @@ public class StationsServiceImpl implements StationsService {
     }
 
     @Override
+    @Transactional
     public Station addStation(Location location, String address) {
         Location found = locationRepository.findById(location.getId()).orElseThrow();
         Station station = new Station();
