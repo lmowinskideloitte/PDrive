@@ -32,13 +32,13 @@ public class TripsServiceImpl implements TripsService {
         Random random = new Random();
         Long distance = random.nextLong(1, 100);
         Trip trip = new Trip();
-        trip.setCard(card);
         trip.setOriginStation(vehicle.getStation());
         vehicle.setStation(station);
         vehicle.setRenter(null);
         trip.setDistance(distance);
         trip.setDestinationStation(station);
         trip.setPayment(paymentService.createPayment(card, distance*3));
+        trip.setCard(trip.getPayment().getCard());
         trip.setVehicle(vehicle);
         return tripRepository.save(trip);
     }
