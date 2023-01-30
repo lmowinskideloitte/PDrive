@@ -41,7 +41,7 @@ public class TripsServiceImpl implements TripsService {
         vehicle.setRenter(null);
         vehicle.setStation(station);
 
-        Trip trip = new Trip(paymentService.createPayment(card, distance), vehicle, originStation, station, distance, null);
+        Trip trip = new Trip(paymentService.createPayment(card, distance*3), vehicle, originStation, station, distance, null);
         return tripRepository.save(trip);
     }
 }

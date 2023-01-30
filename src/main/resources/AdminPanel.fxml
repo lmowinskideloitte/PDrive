@@ -5,9 +5,10 @@
 
 <AnchorPane prefHeight="517.0" prefWidth="993.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pl.put.poznan.pdrive.GUI.AdminPanel">
    <children>
-      <Button layoutX="779.0" layoutY="38.0" mnemonicParsing="false" prefHeight="104.0" prefWidth="185.0" text="Add vehicle" />
-      <Button layoutX="779.0" layoutY="159.0" mnemonicParsing="false" prefHeight="112.0" prefWidth="185.0" text="Add station" />
-      <ComboBox layoutX="45.0" layoutY="38.0" prefWidth="150.0" />
-      <ComboBox layoutX="232.0" layoutY="38.0" prefWidth="150.0" />
+      <Button layoutX="794.0" layoutY="14.0" mnemonicParsing="false" prefHeight="104.0" prefWidth="185.0" text="Add vehicle" />
+      <Button layoutX="794.0" layoutY="129.0" mnemonicParsing="false" prefHeight="112.0" prefWidth="185.0" text="Add station" />
+      <ComboBox fx:id="vehicleType" layoutX="20.0" layoutY="14.0" onAction="#onVehicleType" prefHeight="25.0" prefWidth="244.0" promptText="Vehicle type" />
+      <Spinner fx:id="tripCount" layoutX="274.0" layoutY="14.0" prefHeight="25.0" prefWidth="244.0" />
+      <Spinner fx:id="batteryCharge" layoutX="526.0" layoutY="14.0" prefHeight="25.0" prefWidth="244.0" />
    </children>
 </AnchorPane>
